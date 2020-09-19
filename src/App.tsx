@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { getRawResultFromSouceData, handleResultOrder } from './model/parse-data';
+import { parseKeys } from './model/parse-key';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  handleClick() {
+    const textArea = document.querySelector('#paste-data') as any;
+    const value = textArea.value;
+    try {
+      let result = getRawResultFromSouceData(value);
+      result = handleResultOrder(result);
+      console.log(result);
+    } catch (e) {
+      alert('数据有误，请检查数据。');
+    }
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div className="top">
+          {/* @ts-ignore */}
+          <textarea name="" id="paste-data" placeholder="请粘贴数据" autoFocus={true}></textarea>
+          <div className="paste-list">
+            {
+              Object.keys(parseKeys).map((key, index) => {
+                return (<div className="main-key" key={index}>
+                  {key}
+                  {
+                    parseKeys[key].map((item: any, index1: number) => {
+                      const key = index + '-' + index1;
+                      return <div className="sub-key" key={key}>{item}</div>
+                    })
+                  }
+                </div>);
+              })
+            }
+          </div>
+        </div>
+        <div className="bottom">
+          <button onClick={this.handleClick}>点击转换</button>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
