@@ -12,34 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-#paste-data {
-  width: 800px;
-  height: 300px;
-  flex: 1;
-  margin: 0 30px 0 0;
-}
-.top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.paste-list {
-  height: 300px;
-  width: 400px;
-  overflow: scroll;
-  text-align: left;
-  border: 1px solid #ccc;
-  padding: 20px;
-  box-sizing: border-box;
-  margin: 0 30px;
-}
-.main-key {
-  color: red;
-  padding: 0 0 10px 0px;
-  font-size: 18px;
-}
-.sub-key {
-  color: black;
-  font-size: 14px;
-}

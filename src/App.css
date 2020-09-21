@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .App {
 }
 
@@ -34,4 +36,58 @@
   to {
     transform: rotate(360deg);
   }
+}
+.ant-table-container {
+  overflow-x: scroll;
+  box-shadow: 2px 2px 4px 0 #ccc;
+}
+.ant-table-thead th {
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ant-table-cell {
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.ant-table-content table {
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.ant-table-thead > tr > th[colspan]:not([colspan='1']) {
+  text-align: left;
+}
+
+
+#paste-data {
+  width: 800px;
+  height: 300px;
+  flex: 1;
+  margin: 0 30px 0 0;
+}
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.paste-list {
+  height: 300px;
+  width: 400px;
+  overflow: scroll;
+  text-align: left;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 30px;
+  box-shadow: 2px 2px 4px 0 #ccc;
+}
+.main-key {
+  color: red;
+  padding: 0 0 10px 0px;
+  font-size: 18px;
+}
+.sub-key {
+  color: black;
+  font-size: 14px;
 }

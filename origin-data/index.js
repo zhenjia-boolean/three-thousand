@@ -1,18 +1,32 @@
-import { parseKeys } from "./parse-key";
+const fs = require('fs');
 
-export function getRawResultFromSouceData(text: string) {
-  let result: any = {};
+const text = JSON.stringify(fs.readFileSync('./source.txt', 'utf-8'));
+const pointKeyOrderObj = JSON.parse(fs.readFileSync('./keys.json', 'utf-8'));
+const needRewriteKeys = false;
+// 原生 data 的 key 结构，在需要更新 Key 结构的时候才输出；
+const rawKeyResult = {};
+
+// 1. 解析数据
+let result = getRawResultFromSouceData();
+// 2. 按照特定顺序排列好
+result = handleResultOrder(result);
+// 3. 输出
+fs.writeFileSync('./result.json', JSON.stringify(result, null, 4), { encoding: 'utf-8' });
+needRewriteKeys && fs.writeFileSync('./keys.json', JSON.stringify(keyResult, null, 4), { encoding: 'utf-8' });
+
+function getRawResultFromSouceData() {
+  let result = {};
   // ; 代表一个大项
   const items = text.split('；');
   for (const item of items) {
     let mainKey = item.split("：")[0].trim();
     // bad case.
-    if (mainKey === "\"" || mainKey === "") continue;
-    // eslint-disable-next-line
+    if (mainKey === "\"") continue;
     mainKey = mainKey.replace(/\"/g, "")
 
     if (!result[mainKey]) {
       result[mainKey] = {};
+      rawKeyResult[mainKey] = [];
     }
 
     try {
@@ -22,10 +36,11 @@ export function getRawResultFromSouceData(text: string) {
         let subKey = subItems[i].trim();
         subKey = subKey.replace(/#/g, "");
         result[mainKey][subKey] = subItems[i + 1].trim();
+        rawKeyResult[mainKey].push(subKey);
       }
     } catch (e) {
       console.error(e);
-      throw new Error(e);
+      console.log(item);
     }
   }
   return result;
@@ -35,13 +50,13 @@ export function getRawResultFromSouceData(text: string) {
  * 把提取到的 object 按默认的 keys 排序
  * 没有 keys 的顺序，通通按空处理；
  */
-export function handleResultOrder(result: any) {
-  const keys = Object.keys(parseKeys);
-  const newResult: any = {};
+function handleResultOrder(result) {
+  const keys = Object.keys(pointKeyOrderObj);
+  const newResult = {};
 
   for (const key of keys) {
     const mainItem = result[key] || {};
-    const order = parseKeys[key];
+    const order = pointKeyOrderObj[key];
     if (!order) continue;
     newResult[key] = {};
 
