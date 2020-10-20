@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/data-handle-for-girlfriend/static/css/main.c82fa903.chunk.css",
+    "main.js": "/data-handle-for-girlfriend/static/js/main.c5b43f14.chunk.js",
+    "main.js.map": "/data-handle-for-girlfriend/static/js/main.c5b43f14.chunk.js.map",
+    "runtime-main.js": "/data-handle-for-girlfriend/static/js/runtime-main.7fd197a6.js",
+    "runtime-main.js.map": "/data-handle-for-girlfriend/static/js/runtime-main.7fd197a6.js.map",
+    "static/css/2.cd846464.chunk.css": "/data-handle-for-girlfriend/static/css/2.cd846464.chunk.css",
+    "static/js/2.fc32c249.chunk.js": "/data-handle-for-girlfriend/static/js/2.fc32c249.chunk.js",
+    "static/js/2.fc32c249.chunk.js.map": "/data-handle-for-girlfriend/static/js/2.fc32c249.chunk.js.map",
+    "index.html": "/data-handle-for-girlfriend/index.html",
+    "precache-manifest.b7399b9b48339599768c4bc483f82cc7.js": "/data-handle-for-girlfriend/precache-manifest.b7399b9b48339599768c4bc483f82cc7.js",
+    "service-worker.js": "/data-handle-for-girlfriend/service-worker.js",
+    "static/css/2.cd846464.chunk.css.map": "/data-handle-for-girlfriend/static/css/2.cd846464.chunk.css.map",
+    "static/css/main.c82fa903.chunk.css.map": "/data-handle-for-girlfriend/static/css/main.c82fa903.chunk.css.map",
+    "static/js/2.fc32c249.chunk.js.LICENSE.txt": "/data-handle-for-girlfriend/static/js/2.fc32c249.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7fd197a6.js",
+    "static/css/2.cd846464.chunk.css",
+    "static/js/2.fc32c249.chunk.js",
+    "static/css/main.c82fa903.chunk.css",
+    "static/js/main.c5b43f14.chunk.js"
+  ]
+}
