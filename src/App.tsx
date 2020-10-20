@@ -35,6 +35,10 @@ class App extends Component {
       return (document.querySelector('.ant-table-thead')! as any).innerText;
     },
   });
+  handleClear = () => {
+    const textArea = document.querySelector('#paste-data') as any;
+    textArea.value = "";
+  }
 
   handleClick = () => {
     const textArea = document.querySelector('#paste-data') as any;
@@ -58,22 +62,27 @@ class App extends Component {
   renderTable = () => {
     if (!this.state.showTable || !this.tableData) return null;
 
-    const keys = Object.keys(this.tableData);
-    const data: any = {}
-    for (const key of keys) {
-      Object.assign(data, this.tableData[key]);
-    }
+    // const keys = Object.keys(this.tableData);
+    // const data: any = {}
+    // for (const key of keys) {
+    //   Object.assign(data, this.tableData[key]);
+    // }
 
     return (
       <div>
-        <Table dataSource={[data]}>
-          { Object.keys(parseKeys).map((item, index) => {
+        <Table dataSource={[this.tableData]}>
+          {
+            parseKeys.map((keyName: any, index: any) => {
+              return <Column title={keyName} dataIndex={keyName} key={keyName} />
+            })
+          }
+          {/* { Object.keys(parseKeys).map((item, index) => {
             return (<ColumnGroup title={item}>
               { parseKeys[item].map((subItem: any, subIndex: any) => {
                 return <Column title={subItem} dataIndex={subItem} key={subItem} />
               })}
             </ColumnGroup>)
-          }) }
+          }) } */}
         </Table>
         <Button type="primary" id="copy-header" style={{ marginRight: 10 }}>复制行头数据</Button>
         <Button type="primary" id="copy-row">复制行数据</Button>
@@ -89,7 +98,7 @@ class App extends Component {
           <TextArea name="" id="paste-data" placeholder={`请粘贴数据，例如 ${example}`} autoFocus={true}></TextArea>
           <div className="paste-list">
             <h3>程序会按以下顺序解析：</h3>
-            {
+            {/* {
               Object.keys(parseKeys).map((key, index) => {
                 return (<div className="main-key" key={index}>
                   {key}
@@ -101,11 +110,18 @@ class App extends Component {
                   }
                 </div>);
               })
+            } */}
+            {
+              parseKeys.map((item: any, index1: number) => {
+                const key = item + '-' + index1;
+                return <div className="sub-key" key={key}>{item}</div>
+              })
             }
           </div>
         </div>
         <div className="bottom" style={{ marginTop: 10, marginBottom: 10 }}>
           <Button type="primary" onClick={this.handleClick}>点击转换</Button>
+          <Button type="primary" style={{ marginLeft: 20, background: "#faf1d1", color: "black"}} onClick={this.handleClear}>清空</Button>
         </div>
         { this.renderTable() }
       </div>

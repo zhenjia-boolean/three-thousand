@@ -36,19 +36,31 @@ export function getRawResultFromSouceData(text: string) {
  * 没有 keys 的顺序，通通按空处理；
  */
 export function handleResultOrder(result: any) {
-  const keys = Object.keys(parseKeys);
+  const keys = Object.keys(result);
   const newResult: any = {};
 
+  const fatternResult: any = {};
+  // 结果拍平
   for (const key of keys) {
     const mainItem = result[key] || {};
-    const order = parseKeys[key];
-    if (!order) continue;
-    newResult[key] = {};
-
-    // 重新设置排序
-    for (const item of order) {
-      newResult[key][item] = mainItem[item] || "空";
-    }
+    Object.assign(fatternResult, mainItem);
   }
+
+  // 重新设置排序
+  for (const item of parseKeys) {
+    newResult[item] = fatternResult[item] || "空";
+  }
+
+  // for (const key of keys) {
+  //   const mainItem = result[key] || {};
+  //   const order = parseKeys[key];
+  //   if (!order) continue;
+  //   newResult[key] = {};
+
+  //   // 重新设置排序
+  //   for (const item of order) {
+  //     newResult[key][item] = mainItem[item] || "空";
+  //   }
+  // }
   return newResult;
 }
